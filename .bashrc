@@ -122,3 +122,7 @@ else # normal
 fi
 PATH=$HOME/.cabal/bin:$PATH
 
+# Go language path
+export GOROOT=/opt/go/source/go
+export PATH=$PATH:$GOROOT/bin
+
