@@ -10,3 +10,8 @@ ConfigFiles
 
     etc
 
+    scripts:
+        fixubuntu.sh to disable lenses and online searches stuff in Unity
+
+
+
