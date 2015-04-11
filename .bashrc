@@ -113,16 +113,27 @@ if ! shopt -oq posix; then
   fi
 fi
 TERM="xterm-256color"
-PATH=$PATH:/home/omie/scripts
 if [ $(id -u) -eq 0 ];
 then # you are root, set red colour prompt
-  PS1="[\\[$(tput setaf 1)\\]\\h \\W \\[$(tput sgr0)\\]]: "
+  PS1="\n\[$(tput setaf 1)\\]\\h \\w \\[$(tput sgr0)\\]\n: "
 else # normal
-  PS1='[\[\033[0;35m\]\h\[\033[0;33m\] \W\[\033[32m\]]: '
+  PS1="\n\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[32m\]\n: "
 fi
-PATH=$HOME/.cabal/bin:$PATH
 
 # Go language path
-export GOROOT=/opt/go/source/go
+export GOROOT=/opt/go1.4
 export PATH=$PATH:$GOROOT/bin
+export GOPATH=/opt/gopath
+export PATH=$PATH:$GOPATH/bin
+#alias gohere='export GOPATH=`pwd`'
+
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+
+alias serve='python -m SimpleHTTPServer 8013'
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
 

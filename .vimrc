@@ -11,7 +11,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " ================ General Config ====================
-
+set t_Co=256
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
@@ -19,7 +19,6 @@ set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
 set ruler
-"colorscheme gentooish
 set autoread                    "Reload files changed outside vim
 
 " This makes vim act like all other editors, buffers can
@@ -104,7 +103,12 @@ autocmd VimEnter * NERDTree
 "autocmd BufWinEnter * NERDTreeMirrorOpen
 autocmd VimEnter * wincmd p
 let g:nerdtree_tabs_focus_on_files=1
+nmap <silent> <F2> :NERDTreeToggle<CR>
 nmap <silent> <F3> :NERDTreeTabsOpen<CR>
+
+" ================ Tagbar =========================
+autocmd VimEnter * TagbarOpen
+nmap <F8> :TagbarToggle<CR>
 
 " ================ CTRL+P ===========================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -114,7 +118,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:js_indent_log = 0
 
 " ============ colorscheme ==========================
-"colorscheme molokai
+"colorscheme molokaigo
+"colorscheme gentooish
 "let g:molokai_original = 1
 
 
@@ -129,5 +134,25 @@ set runtimepath+=$GOROOT/misc/vim " replace $GOROOT with the output of: go env G
 filetype plugin indent on
 syntax on
 autocmd FileType go compiler go
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+au BufWritePost *.go silent! !ctags --exclude=*.html --exclude=*.js ./*.go &
+
+
+"============= Autocompletion =================
+let g:neocomplete#enable_at_startup = 1
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" close scratch window
+inoremap <silent> <CR> <CR><c-o>:pclose<CR>
 
 
