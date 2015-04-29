@@ -11,7 +11,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " ================ General Config ====================
-set t_Co=256
+"set t_Co=256
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
@@ -112,7 +112,12 @@ nmap <F8> :TagbarToggle<CR>
 
 " ================ CTRL+P ===========================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+" let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
 
+autocmd VimEnter * nnoremap <C-S-P> :CtrlPTag<cr>
 
 " ========== Disable JS Indent logging ==============
 let g:js_indent_log = 0
